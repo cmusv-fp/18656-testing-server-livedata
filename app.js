@@ -6,7 +6,10 @@ var sockserver = new wsServer({ port: 80 })
 const sendJSON = (ws, index) => {
   if(index < data.rates.length){
     const d = data.rates[index];
-    const jsonData = JSON.stringify(d); // Convert object to JSON string
+    let arrd = [d];
+    const jsonData = JSON.stringify(arrd); // Convert object to JSON string
+
+    console.log(jsonData);
     ws.send(jsonData); 
   }
 };
