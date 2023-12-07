@@ -1,15 +1,29 @@
 var http = require('http');
 var wsServer = require("ws").Server;
-
+var data = require('./liveData.js');
 var sockserver = new wsServer({ port: 80 })
+
+const sendJSON = (ws, index) => {
+  if(index < data.rates.length){
+    const d = data.rates[index];
+    const jsonData = JSON.stringify(d); // Convert object to JSON string
+    ws.send(jsonData); 
+  }
+};
 sockserver.on('connection', ws => {
-  console.log("ll")
-  var a = {
-    'alal': 1,
-    "mmmm": 2,
-    "pol": "mmm"
-  };
-  ws.send(JSON.stringify(a));
+  console.log("new client connected");
+  let i = 0;
+  const interval = setInterval(() => {
+    sendJSON(ws, i);
+    i+=1;
+  }, 1000);
+
+  // // Stop sending after 10 seconds (for demonstration purposes)
+  setTimeout(() => {
+    clearInterval(interval);
+    ws.close();
+  }, 1000000);
+  ws.send("coonected to socket");
   ws.on('close', () => console.log('Client has disconnected!'))
   // ws.on('message', data => {
   //   // sockserver.clients.forEach(client => {
