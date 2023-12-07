@@ -1,7 +1,7 @@
 var http = require('http');
 var wsServer = require("ws").Server;
 
-var sockserver = new wsServer({ port: 8000 })
+var sockserver = new wsServer({ port: 80 })
 sockserver.on('connection', ws => {
   console.log("ll")
   var a = {
@@ -22,10 +22,10 @@ sockserver.on('connection', ws => {
   }
  })
 //create a server object:
-http.createServer(function (req, res) {
-  res.write('Hello World!'); //write a response to the client
-  res.end(); //end the response
-}).listen(80, () => {
-  console.log("started")
-}); //the server object listens on port 8080
+// http.createServer(function (req, res) {
+//   res.write('Hello World!'); //write a response to the client
+//   res.end(); //end the response
+// }).listen(80, () => {
+//   console.log("started")
+// }); //the server object listens on port 8080
 
