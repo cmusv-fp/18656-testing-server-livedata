@@ -5,7 +5,7 @@
  */
 var wsServer = require("ws").Server
 
-var sockserver = new wsServer({ port: 80 })
+var sockserver = new wsServer({ port: 8080 })
 sockserver.on('connection', ws => {
   console.log("ll")
   var a = {
