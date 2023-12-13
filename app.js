@@ -20,13 +20,16 @@ sockserver.on('connection', ws => {
     sendJSON(ws, i);
     i+=1;
   }, 1000);
-
+  ws.send( JSON.stringify({
+    "ev":"status",
+    "status":"connected",
+    "message": "Connected Successfully"
+  }));
   // // Stop sending after 10 seconds (for demonstration purposes)
   setTimeout(() => {
     clearInterval(interval);
     ws.close();
   }, 1000000);
-  ws.send("coonected to socket");
   ws.on('close', () => console.log('Client has disconnected!'))
   // ws.on('message', data => {
   //   // sockserver.clients.forEach(client => {
