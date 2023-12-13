@@ -20,11 +20,12 @@ sockserver.on('connection', ws => {
     sendJSON(ws, i);
     i+=1;
   }, 1000);
-  ws.send( JSON.stringify({
+  let firstmsg = [{
     "ev":"status",
     "status":"connected",
     "message": "Connected Successfully"
-  }));
+  }];
+  ws.send(JSON.stringify(firstmsg));
   // // Stop sending after 10 seconds (for demonstration purposes)
   setTimeout(() => {
     clearInterval(interval);
